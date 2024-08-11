@@ -23,18 +23,8 @@ public class Schedule {
     private long id;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "schedule_employee",
-            joinColumns = { @JoinColumn(name = "employee_id") },
-            inverseJoinColumns = { @JoinColumn(name = "schedule_id")}
-    )
     private List<Employee> employees;
-    @ManyToMany
-    @JoinTable(
-            name = "schedule_pet",
-            joinColumns = { @JoinColumn(name = "pet_id") },
-            inverseJoinColumns = { @JoinColumn(name = "schedule_id")}
-    )
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Pet> pets;
     private LocalDate date;
 

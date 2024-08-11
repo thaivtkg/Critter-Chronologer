@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 @RequestMapping("/pet")
 public class PetController {
 
+    @Autowired
     private PetService petService;
 
     @PostMapping
     public PetDTO savePet(@RequestBody PetDTO petDTO) {
-        Pet pet = new Pet();
-        convertToPet(petDTO);
+        Pet pet = convertToPet(petDTO);
 
         return convertToDto(petService.save(pet,petDTO.getOwnerId()));
     }
@@ -45,7 +45,10 @@ public class PetController {
 
     public Pet convertToPet(PetDTO petDTO) {
         Pet pet = new Pet();
-        BeanUtils.copyProperties(petDTO, pet);
+        pet.setType(petDTO.getType());
+        pet.setName(petDTO.getName());
+        pet.setBirthDate(petDTO.getBirthDate());
+        pet.setNotes(petDTO.getNotes());
         return pet;
     }
 
